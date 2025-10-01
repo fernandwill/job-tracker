@@ -19,8 +19,7 @@ class JobNote extends Model
     protected $fillable = [
         'job_id',
         'body',
-        'pinned',
-        'noted_at',
+        'reminder_at'
     ];
 
     /**
@@ -30,8 +29,7 @@ class JobNote extends Model
     {
         return [
             'job_id' => 'integer',
-            'pinned' => 'boolean',
-            'noted_at' => 'datetime',
+            'reminder_at' => 'datetime',
         ];
     }
 
@@ -41,13 +39,5 @@ class JobNote extends Model
     public function job(): BelongsTo
     {
         return $this->belongsTo(Job::class);
-    }
-
-    /**
-     * Scope the query to pinned notes.
-     */
-    public function scopePinned(Builder $query): Builder
-    {
-        return $query->where('pinned', true);
     }
 }
