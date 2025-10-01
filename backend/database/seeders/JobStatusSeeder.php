@@ -19,13 +19,13 @@ class JobStatusSeeder extends Seeder
                 'sort_order' => 0,
             ],
             [
-                'name' => 'Interviewing',
-                'slug' => 'interviewing',
+                'name' => 'Online Assessment',
+                'slug' => 'online-assessment',
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Offer',
-                'slug' => 'offer',
+                'name' => 'Interview',
+                'slug' => 'interview',
                 'sort_order' => 2,
             ],
             [
