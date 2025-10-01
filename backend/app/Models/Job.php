@@ -22,17 +22,9 @@ class Job extends Model
         'company',
         'location',
         'job_status_id',
-        'application_url',
-        'salary_min',
-        'salary_max',
-        'salary_currency',
+        'posting_url',
+        'salary',
         'applied_at',
-        'followed_up_at',
-        'interview_at',
-        'archived_at',
-        'is_remote',
-        'is_favorite',
-        'notes',
     ];
 
     /**
@@ -42,14 +34,7 @@ class Job extends Model
     {
         return [
             'job_status_id' => 'integer',
-            'salary_min' => 'integer',
-            'salary_max' => 'integer',
-            'applied_at' => 'datetime',
-            'followed_up_at' => 'datetime',
-            'interview_at' => 'datetime',
-            'archived_at' => 'datetime',
-            'is_remote' => 'boolean',
-            'is_favorite' => 'boolean',
+            'applied_at' => 'date',
         ];
     }
 
@@ -86,12 +71,5 @@ class Job extends Model
             $builder->where('slug', $status);
         });
     }
-
-    /**
-     * Determine if the job is archived.
-     */
-    public function getIsArchivedAttribute(): bool
-    {
-        return (bool) $this->archived_at;
-    }
 }
+
