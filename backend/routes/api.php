@@ -7,5 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['throttle:api'])->group(static function (): void {
     Route::apiResource('jobs', JobController::class);
 
-    Route::apiResource('jobs.notes', JobNoteController::class)->shallow();
+    Route::apiResource('jobs.notes', JobNoteController::class);
 });
+

@@ -76,51 +76,51 @@ class JobNoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Job $job, JobNote $jobNote): JobNoteResource
+    public function show(Job $job, JobNote $note): JobNoteResource
     {
-        $this->ensureJobNoteBelongsToJob($job, $jobNote);
+        $this->ensureJobNoteBelongsToJob($job, $note);
 
-        $jobNote->load(['job.status']);
+        $note->load(['job.status']);
 
-        return new JobNoteResource($jobNote);
+        return new JobNoteResource($note);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Job $job, JobNoteUpdateRequest $request, JobNote $jobNote): JobNoteResource
+    public function update(Job $job, JobNoteUpdateRequest $request, JobNote $note): JobNoteResource
     {
-        $this->ensureJobNoteBelongsToJob($job, $jobNote);
+        $this->ensureJobNoteBelongsToJob($job, $note);
 
         $data = $request->validated();
 
         if (array_key_exists('body', $data)) {
-            $jobNote->body = $data['body'];
+            $note->body = $data['body'];
         }
 
         if (array_key_exists('reminder_at', $data)) {
-            $jobNote->reminder_at = $data['reminder_at'];
+            $note->reminder_at = $data['reminder_at'];
         }
 
         if (array_key_exists('created_by', $data)) {
-            $jobNote->created_by = $data['created_by'];
+            $note->created_by = $data['created_by'];
         }
 
-        $jobNote->save();
+        $note->save();
 
-        $jobNote->load(['job.status']);
+        $note->load(['job.status']);
 
-        return new JobNoteResource($jobNote);
+        return new JobNoteResource($note);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job, JobNote $jobNote): Response
+    public function destroy(Job $job, JobNote $note): Response
     {
-        $this->ensureJobNoteBelongsToJob($job, $jobNote);
+        $this->ensureJobNoteBelongsToJob($job, $note);
 
-        $jobNote->delete();
+        $note->delete();
 
         return response()->noContent();
     }
@@ -128,9 +128,9 @@ class JobNoteController extends Controller
     /**
      * Ensure the note belongs to the provided job.
      */
-    protected function ensureJobNoteBelongsToJob(Job $job, JobNote $jobNote): void
+    protected function ensureJobNoteBelongsToJob(Job $job, JobNote $note): void
     {
-        if ($jobNote->job_id !== $job->getKey()) {
+        if ($note->job_id !== $job->getKey()) {
             abort(Response::HTTP_NOT_FOUND);
         }
     }
