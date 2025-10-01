@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('job_notes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_id')->constrained()->onDelete('cascade');
+            $table->foreignId('created_by')->nullable()->constrained()->onDelete('cascade');
+            $table->text('body');
+            $table->timestamp('reminder_at')->nullable();
+            $table->softDeletes();
+            $table->index('job_id');
             $table->timestamps();
         });
     }

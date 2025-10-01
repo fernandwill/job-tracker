@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('company');
+            $table->string('location')->nullable();
+            $table->string('salary')->nullable();
+            $table->date('applied_at')->nullable()->index();
+            $table->string('posting_url')->nullable();
+            $table->foreignId('job_status_id')->constrained('job_statuses')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
+            $table->index('job_status_id');
         });
     }
 
