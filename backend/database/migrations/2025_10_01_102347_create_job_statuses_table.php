@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('job_statuses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->unsignedInteger('sort_order')->default(0);
         });
     }
 
