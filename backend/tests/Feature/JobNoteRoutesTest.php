@@ -42,9 +42,6 @@ class JobNoteRoutesTest extends TestCase
             'body' => 'Original note body',
         ]);
 
-        $note->created_by = $user->id;
-        $note->save();
-
         $this->getJson("/api/jobs/{$job->id}/notes/{$note->id}")
             ->assertOk()
             ->assertJsonPath('data.id', $note->id);
@@ -58,6 +55,6 @@ class JobNoteRoutesTest extends TestCase
         $this->deleteJson("/api/jobs/{$job->id}/notes/{$note->id}")
             ->assertNoContent();
 
-        $this->assertDatabaseMissing('job_notes', ['id' => $note->id]);
+        $this->assertSoftDeleted('job_notes', ['id' => $note->id]);
     }
 }
