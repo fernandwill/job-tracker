@@ -7,8 +7,8 @@ const JOB_STATUSES_QUERY_KEY = ['job-statuses'] as const
 export const useJobStatuses = () =>
   useQuery({
     queryKey: JOB_STATUSES_QUERY_KEY,
-    queryFn: () => get<JobStatus[]>('/job-statuses'),
-    select: (statuses) => [...statuses].sort((a, b) => a.sort_order - b.sort_order),
+    queryFn: () => get<{ data: JobStatus[] }>('/job-statuses'),
+    select: ({ data }) => [...data].sort((a, b) => a.sort_order - b.sort_order),
     staleTime: 5 * 60 * 1000,
   })
 
