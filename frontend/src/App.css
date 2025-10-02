@@ -415,6 +415,13 @@
   color: var(--color-brand-strong);
 }
 
+.upcoming-interviews__placeholder {
+  margin: 0;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
 .kanban__placeholder {
   flex: 1;
   display: grid;
