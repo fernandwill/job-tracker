@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { patch } from '../api/client'
-import type { Job, PaginatedResponse } from '../types'
+import type { ApiResource, Job, PaginatedResponse } from '../types'
 import { JOBS_QUERY_KEY } from './useJobs'
 
 interface UpdateJobStatusInput {
@@ -15,9 +15,9 @@ interface JobsQueryContext {
 export const useUpdateJobStatus = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<Job, Error, UpdateJobStatusInput, JobsQueryContext>({
+  return useMutation<ApiResource<Job>, Error, UpdateJobStatusInput, JobsQueryContext>({
     mutationFn: ({ jobId, job_status_id }) =>
-      patch<Job, Partial<Job>>(`/jobs/${jobId}`, { job_status_id }),
+      patch<ApiResource<Job>, Partial<Job>>(`/jobs/${jobId}`, { job_status_id }),
     onMutate: async ({ jobId, job_status_id }) => {
       await queryClient.cancelQueries({ queryKey: JOBS_QUERY_KEY })
 
@@ -41,7 +41,9 @@ export const useUpdateJobStatus = () => {
         queryClient.setQueryData(JOBS_QUERY_KEY, context.previousJobs)
       }
     },
-    onSuccess: (updatedJob) => {
+    onSuccess: (updatedJobResource) => {
+      const updatedJob = updatedJobResource.data
+
       queryClient.setQueryData<PaginatedResponse<Job> | undefined>(
         JOBS_QUERY_KEY,
         (current) => {
@@ -51,7 +53,9 @@ export const useUpdateJobStatus = () => {
 
           return {
             ...current,
-            data: current.data.map((job) => (job.id === updatedJob.id ? updatedJob : job)),
+            data: current.data.map((job) =>
+              job.id === updatedJob.id ? { ...job, ...updatedJob } : job,
+            ),
           }
         },
       )
