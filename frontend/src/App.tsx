@@ -1,4 +1,5 @@
 import './App.css'
+import { KanbanBoard } from './components/KanbanBoard'
 
 export default function App() {
   return (
@@ -45,9 +46,7 @@ export default function App() {
         </header>
 
         <section className="kanban" aria-label="Kanban board">
-          <div className="kanban__placeholder">
-            Drag-and-drop columns and cards will appear here once configured.
-          </div>
+          <KanbanBoard />
         </section>
       </div>
     </div>
