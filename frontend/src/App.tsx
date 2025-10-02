@@ -1,54 +1,90 @@
+import { useMemo, useState } from 'react'
 import './App.css'
-import { KanbanBoard } from './components/KanbanBoard'
+import { HeroHeader, type HeroHeaderProps } from './components/dashboard/HeroHeader'
+import { ApplicationsBoard, type ApplicationsBoardProps } from './components/dashboard/ApplicationsBoard'
+import {
+  CalendarDaysIcon,
+  FunnelIcon,
+  PlusIcon,
+  SparklesIcon,
+} from './components/dashboard/icons'
 
 export default function App() {
+  const [user] = useState(() => ({
+    firstName: 'Alex',
+    metrics: {
+      activeApplications: 18,
+      weeklyDelta: 3,
+      interviewsScheduled: 4,
+      nextInterviewLabel: 'Jul 11',
+    },
+  }))
+
+  const heroHeaderContent = useMemo(
+    () => ({
+      eyebrow: {
+        icon: <SparklesIcon aria-hidden="true" />,
+        text: 'Career workspace',
+      },
+      title: `Good morning, ${user.firstName}`,
+      description:
+        'Track applications, collaborate with referrals, and keep interviews organized in a single streamlined workspace.',
+      actions: [
+        { label: 'Add application', variant: 'primary' },
+        { label: 'Share pipeline' },
+      ],
+      stats: [
+        {
+          label: 'Active applications',
+          value: user.metrics.activeApplications.toString(),
+          trend: {
+            text: `${user.metrics.weeklyDelta >= 0 ? '+' : ''}${user.metrics.weeklyDelta} since last week`,
+          },
+        },
+        {
+          label: 'Interviews scheduled',
+          value: user.metrics.interviewsScheduled.toString(),
+          trend: {
+            text: `Next on ${user.metrics.nextInterviewLabel}`,
+            positive: true,
+            icon: <CalendarDaysIcon aria-hidden="true" />,
+          },
+        },
+      ],
+    }) satisfies HeroHeaderProps,
+    [user]
+  )
+
+  const applicationsBoardContent = useMemo(
+    () => ({
+      eyebrow: 'Pipeline overview',
+      title: 'Applications board',
+      description:
+        'Drag cards between stages to keep each opportunity up to date. Everything stays in sync across your team.',
+      actions: [
+        {
+          label: 'New application',
+          variant: 'primary',
+          icon: <PlusIcon aria-hidden="true" />,
+        },
+        {
+          label: 'Filter',
+          icon: <FunnelIcon aria-hidden="true" />,
+        },
+      ],
+    }) satisfies ApplicationsBoardProps,
+    []
+  )
+
   return (
-    <div className="app">
-      <aside className="sidebar">
-        <div className="sidebar__brand">
-          <span className="sidebar__brand-badge">JT</span>
-          <div>
-            <h1>Job Tracker</h1>
-            <p>Stay on top of every opportunity.</p>
-          </div>
+    <div className="app-shell">
+      <HeroHeader {...heroHeaderContent} />
+
+      <main className="dashboard-grid">
+        <div className="dashboard-grid__column">
+          <ApplicationsBoard {...applicationsBoardContent} />
         </div>
-
-        <nav className="sidebar__nav" aria-label="Primary navigation">
-          <a className="sidebar__link sidebar__link--active" href="#">Kanban board</a>
-          <a className="sidebar__link" href="#">Calendar</a>
-          <a className="sidebar__link" href="#">Reports</a>
-          <a className="sidebar__link" href="#">Settings</a>
-        </nav>
-
-        <div className="sidebar__footer">
-          <button className="sidebar__new-board" type="button">
-            + New board
-          </button>
-          <p className="sidebar__hint">Organize positions by team or workflow.</p>
-        </div>
-      </aside>
-
-      <div className="workspace">
-        <header className="workspace__header">
-          <div>
-            <h2>Applications pipeline</h2>
-            <p>Monitor each application as it moves from prospect to offer.</p>
-          </div>
-
-          <div className="workspace__actions">
-            <button className="workspace__action workspace__action--primary" type="button">
-              Add application
-            </button>
-            <button className="workspace__action" type="button">
-              Filter
-            </button>
-          </div>
-        </header>
-
-        <section className="kanban" aria-label="Kanban board">
-          <KanbanBoard />
-        </section>
-      </div>
+      </main>
     </div>
   )
 }
