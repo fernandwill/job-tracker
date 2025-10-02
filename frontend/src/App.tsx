@@ -1,54 +1,22 @@
 import './App.css'
-import { KanbanBoard } from './components/KanbanBoard'
+import { HeroHeader } from './components/dashboard/HeroHeader'
+import { ApplicationsBoard } from './components/dashboard/ApplicationsBoard'
+import { UpcomingInterviews } from './components/dashboard/UpcomingInterviews'
 
 export default function App() {
   return (
-    <div className="app">
-      <aside className="sidebar">
-        <div className="sidebar__brand">
-          <span className="sidebar__brand-badge">JT</span>
-          <div>
-            <h1>Job Tracker</h1>
-            <p>Stay on top of every opportunity.</p>
-          </div>
+    <div className="app-shell">
+      <HeroHeader />
+
+      <main className="dashboard-grid">
+        <div className="dashboard-grid__column dashboard-grid__column--center">
+          <ApplicationsBoard />
         </div>
 
-        <nav className="sidebar__nav" aria-label="Primary navigation">
-          <a className="sidebar__link sidebar__link--active" href="#">Kanban board</a>
-          <a className="sidebar__link" href="#">Calendar</a>
-          <a className="sidebar__link" href="#">Reports</a>
-          <a className="sidebar__link" href="#">Settings</a>
-        </nav>
-
-        <div className="sidebar__footer">
-          <button className="sidebar__new-board" type="button">
-            + New board
-          </button>
-          <p className="sidebar__hint">Organize positions by team or workflow.</p>
+        <div className="dashboard-grid__column dashboard-grid__column--right">
+          <UpcomingInterviews />
         </div>
-      </aside>
-
-      <div className="workspace">
-        <header className="workspace__header">
-          <div>
-            <h2>Applications pipeline</h2>
-            <p>Monitor each application as it moves from prospect to offer.</p>
-          </div>
-
-          <div className="workspace__actions">
-            <button className="workspace__action workspace__action--primary" type="button">
-              Add application
-            </button>
-            <button className="workspace__action" type="button">
-              Filter
-            </button>
-          </div>
-        </header>
-
-        <section className="kanban" aria-label="Kanban board">
-          <KanbanBoard />
-        </section>
-      </div>
+      </main>
     </div>
   )
 }
