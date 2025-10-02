@@ -1,3 +1,7 @@
+export interface ApiResource<T> {
+  data: T
+}
+
 export interface JobStatus {
   id: number
   name: string
