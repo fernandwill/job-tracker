@@ -38,23 +38,3 @@ export const FunnelIcon = (props: IconProps) => (
   </svg>
 )
 
-export const ClockIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" {...baseIconProps} {...props}>
-    <circle cx="12" cy="12" r="8.5" />
-    <path d="M12 7.5V12l2.75 2.75" />
-  </svg>
-)
-
-export const MapPinIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" {...baseIconProps} {...props}>
-    <path d="M12 20.25s6-4.5 6-9.25a6 6 0 0 0-12 0c0 4.75 6 9.25 6 9.25z" />
-    <circle cx="12" cy="11" r="2.25" />
-  </svg>
-)
-
-export const VideoCameraIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" {...baseIconProps} {...props}>
-    <rect x="3.5" y="6.5" width="11.5" height="11" rx="2.25" />
-    <path d="m14.5 10 4-2.5v8.5l-4-2.5" />
-  </svg>
-)

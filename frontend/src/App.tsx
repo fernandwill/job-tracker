@@ -1,7 +1,6 @@
 import './App.css'
 import { HeroHeader } from './components/dashboard/HeroHeader'
 import { ApplicationsBoard } from './components/dashboard/ApplicationsBoard'
-import { UpcomingInterviews } from './components/dashboard/UpcomingInterviews'
 
 export default function App() {
   return (
@@ -11,10 +10,6 @@ export default function App() {
       <main className="dashboard-grid">
         <div className="dashboard-grid__column dashboard-grid__column--center">
           <ApplicationsBoard />
-        </div>
-
-        <div className="dashboard-grid__column dashboard-grid__column--right">
-          <UpcomingInterviews />
         </div>
       </main>
     </div>
