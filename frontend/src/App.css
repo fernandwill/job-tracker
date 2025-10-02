@@ -325,6 +325,10 @@
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
+.kanban__column--outcome {
+  justify-content: flex-start;
+}
+
 .kanban__column--over {
   border-color: var(--color-brand);
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
@@ -437,6 +441,142 @@
 .kanban__card-meta span:first-of-type::before {
   content: "";
   margin-right: 0;
+}
+
+.status-detail {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  display: grid;
+  gap: 1.75rem;
+}
+
+.status-detail__placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow-card);
+  min-height: 12rem;
+}
+
+.status-detail__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-detail__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+.status-detail__description {
+  margin: 0;
+  max-width: 48ch;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.status-detail__action {
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.status-detail__action:hover,
+.status-detail__action:focus-visible {
+  background: rgba(148, 163, 184, 0.18);
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.status-detail__content {
+  display: flex;
+  min-height: 0;
+}
+
+.status-detail__content .kanban__column {
+  flex: 1;
+}
+
+.outcome-summary {
+  display: grid;
+  gap: 0.5rem;
+  align-items: center;
+  justify-items: start;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px dashed var(--color-border);
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.outcome-summary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+.outcome-summary:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+.outcome-summary--accepted {
+  background: linear-gradient(130deg, rgba(45, 212, 191, 0.32), rgba(16, 185, 129, 0.12));
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #065f46;
+}
+
+.outcome-summary--accepted .outcome-summary__label {
+  color: rgba(6, 95, 70, 0.7);
+}
+
+.outcome-summary--rejected {
+  background: linear-gradient(130deg, rgba(248, 113, 113, 0.35), rgba(239, 68, 68, 0.15));
+  border-color: rgba(220, 38, 38, 0.35);
+  color: #7f1d1d;
+}
+
+.outcome-summary--rejected .outcome-summary__label {
+  color: rgba(127, 29, 29, 0.7);
+}
+
+.kanban__column--outcome.kanban__column--over .outcome-summary {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(99, 102, 241, 0.22);
+  border-color: var(--color-brand);
+}
+
+.outcome-summary__count {
+  font-size: clamp(2.4rem, 3.5vw, 2.8rem);
+  line-height: 1;
+}
+
+.outcome-summary__label {
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 @media (max-width: 1200px) {
