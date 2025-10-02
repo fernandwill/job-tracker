@@ -10,8 +10,10 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-{
-    
-    $this->call(JobStatusSeeder::class);    
+    {
+        $this->call([
+            JobStatusSeeder::class,
+            InterviewSeeder::class,
+        ]);
     }
 }

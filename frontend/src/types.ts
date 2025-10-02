@@ -45,3 +45,12 @@ export interface PaginatedResponse<T> {
     total: number
   }
 }
+
+export interface UpcomingInterview {
+  id: number
+  company: string
+  role: string
+  scheduled_at: string
+  format: 'virtual' | 'in_person'
+  location: string
+}
