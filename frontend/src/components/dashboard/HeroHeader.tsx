@@ -1,14 +1,9 @@
-import { CalendarDaysIcon, SparklesIcon } from './icons'
+import { CalendarDaysIcon} from './icons'
 
 export const HeroHeader = () => {
   return (
     <header className="hero-header" aria-labelledby="hero-heading">
       <div className="hero-header__content">
-        <div className="hero-header__eyebrow">
-          <SparklesIcon aria-hidden="true" />
-          <span>Career workspace</span>
-        </div>
-
         <div className="hero-header__headline">
           <h1 id="hero-heading">Good morning, Alex</h1>
           <p>

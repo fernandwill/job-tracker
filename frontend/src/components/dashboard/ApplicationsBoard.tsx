@@ -17,7 +17,7 @@ export const ApplicationsBoard = () => {
         <div className="applications-board__actions">
           <button type="button" className="applications-board__button applications-board__button--primary">
             <PlusIcon aria-hidden="true" />
-            New application
+            New Application
           </button>
           <button type="button" className="applications-board__button">
             <FunnelIcon aria-hidden="true" />
